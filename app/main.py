@@ -18,8 +18,8 @@ class ChipsChallenge:
         pygame.init()
         pygame.display.set_caption("Chip's Challenge")
         self._display_surf = pygame.display.set_mode(self.size, pygame.HWSURFACE | pygame.DOUBLEBUF)
-        from app.levels import level_1
-        self.level = level_1
+        from app.levels import all_levels
+        self.level = all_levels[1]
         self.level.draw(window_surface=self._display_surf)
         pygame.display.flip()
 

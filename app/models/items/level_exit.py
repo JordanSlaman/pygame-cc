@@ -9,4 +9,4 @@ class LevelExit(Item):
         self.level = level
 
     def interact(self, tile, player):
-        print(f'Completed Level: {self.level.name}!')
+        player.complete_level()

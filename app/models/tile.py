@@ -1,6 +1,6 @@
 from .enums import TileType
 from .items.item import Item
-from .items import Door, ChipGate
+from .items import Door, ChipGate, Box
 from .sprite import TILE_SPRITES
 
 
@@ -17,12 +17,13 @@ class Tile:
         return f"[{self.x_pos}, {self.y_pos}] - {self.type.name}: {self.item}"
 
     def is_navigable(self, player):
-        if isinstance(self.item, Door) or isinstance(self.item, ChipGate):
-            return self.item.is_navigable(player=player, tile=self)
-        if self.type == TileType.FLOOR:
-            return True
+        if isinstance(self.item, (Door, ChipGate, Box)):
+            return self.item.is_navigable(tile=self, player=player)
         elif self.type == TileType.WALL:
             return False
+        elif self.type in (TileType.FLOOR, TileType.WATER):
+            return True
+
 
     def interact(self, player):
         if self.item:
@@ -33,6 +34,8 @@ class Tile:
         if not self.item:
             if self.type == TileType.WALL:
                 return TILE_SPRITES["wall"]
+            elif self.type == TileType.WATER:
+                return TILE_SPRITES["water"]
             else:
                 return TILE_SPRITES["tile"]
         else:

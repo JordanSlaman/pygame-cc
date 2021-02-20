@@ -27,8 +27,7 @@ class Level:
 
         level_map = []
         map_lines = map_string.split('\n')
-        map_lines[:] = [l for l in map_lines if l != ""] # Strip blank lines
-
+        map_lines[:] = [l for l in map_lines if l != ""]  # Strip blank lines
 
         self.map_height = len(map_lines)
         self.map_width = len(map_lines[0])
@@ -45,40 +44,78 @@ class Level:
         return tuple(level_map)
 
     def create_tile(self, char: str, x_pos: int, y_pos: int):
-        if char in (' '):
-            return Tile(x_pos=x_pos, y_pos=y_pos)
-        elif char == '#':
-            return Tile(x_pos=x_pos, y_pos=y_pos, tile_type=TileType.WALL)
-        elif char == 'c':
-            return Tile(x_pos=x_pos, y_pos=y_pos, item=Chip(level=self))
-        elif char == '@':
-            return Tile(x_pos=x_pos, y_pos=y_pos, item=LevelExit(level=self))
-        elif char == 'X':
-            return Tile(x_pos=x_pos, y_pos=y_pos, item=ChipGate(level=self))
-        elif char == 'G':
-            return Tile(x_pos=x_pos, y_pos=y_pos, tile_type=TileType.WALL, item=Door(color=Color.GREEN))
-        elif char == 'g':
-            return Tile(x_pos=x_pos, y_pos=y_pos, item=Key(color=Color.GREEN))
-        elif char == 'B':
-            return Tile(x_pos=x_pos, y_pos=y_pos, tile_type=TileType.WALL, item=Door(color=Color.BLUE))
-        elif char == 'b':
-            return Tile(x_pos=x_pos, y_pos=y_pos, item=Key(color=Color.BLUE))
-        elif char == 'R':
-            return Tile(x_pos=x_pos, y_pos=y_pos, tile_type=TileType.WALL, item=Door(color=Color.RED))
-        elif char == 'r':
-            return Tile(x_pos=x_pos, y_pos=y_pos, item=Key(color=Color.RED))
-        elif char == 'Y':
-            return Tile(x_pos=x_pos, y_pos=y_pos, tile_type=TileType.WALL, item=Door(color=Color.YELLOW))
-        elif char == 'y':
-            return Tile(x_pos=x_pos, y_pos=y_pos, item=Key(color=Color.YELLOW))
-        elif char == 'i':
-            return Tile(x_pos=x_pos, y_pos=y_pos)  # Todo info item
-        elif char == 'C':
+        if char == 'C':
             tile = Tile(x_pos=x_pos, y_pos=y_pos)
             self.player = Player(level=self, starting_tile=tile)
             return tile
+        elif char == ' ':
+            tile_kwargs = {}
+        elif char == '#':
+            tile_kwargs = {
+                "tile_type": TileType.WALL
+            }
+        elif char == 'c':
+            tile_kwargs = {
+                "item": Chip(level=self)
+            }
+        elif char == '@':
+            tile_kwargs = {
+                "item": LevelExit(level=self)
+            }
+        elif char == 'X':
+            tile_kwargs = {
+                "item": ChipGate(level=self)
+            }
+        elif char == 'G':
+            tile_kwargs = {
+                "tile_type": TileType.WALL,
+                "item": Door(color=Color.GREEN)
+            }
+        elif char == 'g':
+            tile_kwargs = {
+                "item": Key(color=Color.GREEN)
+            }
+        elif char == 'B':
+            tile_kwargs = {
+                "tile_type": TileType.WALL,
+                "item": Door(color=Color.BLUE)
+            }
+        elif char == 'b':
+            tile_kwargs = {
+                "item": Key(color=Color.BLUE)
+            }
+        elif char == 'R':
+            tile_kwargs = {
+                "tile_type": TileType.WALL,
+                "item": Door(color=Color.RED)
+            }
+        elif char == 'r':
+            tile_kwargs = {
+                "item": Key(color=Color.RED)
+            }
+        elif char == 'Y':
+            tile_kwargs = {
+                "tile_type": TileType.WALL,
+                "item": Door(color=Color.YELLOW)
+            }
+        elif char == 'y':
+            tile_kwargs = {
+                "item": Key(color=Color.YELLOW)
+            }
+        elif char == 'w':
+            tile_kwargs = {
+                "tile_type": TileType.WATER
+            }
+        elif char == 'o':
+            tile_kwargs = {
+                "item": Box()
+            }
+        elif char == 'i':
+            tile_kwargs = {}  # Todo info item
         else:
             raise Exception(f"Bad map string! Unexpected char: {char}")
+
+        return Tile(x_pos=x_pos, y_pos=y_pos, **tile_kwargs)
 
     def get_tile(self, x_pos: int, y_pos: int):
         selected = self.map[y_pos][x_pos]

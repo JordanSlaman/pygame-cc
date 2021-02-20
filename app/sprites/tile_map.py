@@ -23,8 +23,8 @@ tiles = {
     "player_up_water": (column[2], row[1]),
     "player_right_water": (column[3], row[1]),
 
-    "player_drown": (column[4], row[1]),
-    "player_burn": (column[5], row[1]),
+    "player_drowned": (column[4], row[1]),
+    "player_burned": (column[5], row[1]),
 
     # "unused": (column[6], row[1]),
     # "unused": (column[7], row[1]),
@@ -41,12 +41,12 @@ tiles = {
 
     "boots_skate": (column[0], row[3]),
     "boots_suction": (column[1], row[3]),
-    "boots_fire": (column[2], row[3]),
+    "boots_fireproof": (column[2], row[3]),
     "boots_flipper": (column[3], row[3]),
 
     "boots_skate_masked": (column[4], row[3]),
     "boots_suction_masked": (column[5], row[3]),
-    "boots_fire_masked": (column[6], row[3]),
+    "boots_fireproof_masked": (column[6], row[3]),
     "boots_flipper_masked": (column[7], row[3]),
 
     "bug_down": (column[0], row[4]),
@@ -108,7 +108,6 @@ tiles = {
 
     "wall": (column[0], row[12]),
     # "wall_blue": (column[1], row[12]),
-    # "wall_movable": (column[2], row[12]),
     # "wall_pretty": (column[3], row[12]),
 
     "door_red": (column[4], row[12]),
@@ -118,7 +117,9 @@ tiles = {
 
     "water": (column[0], row[13]),
     "ice": (column[1], row[13]),
-    # "mud": (column[2], row[13]),
+
+    "box_pushable": (column[2], row[12]),
+    "box_submerged": (column[2], row[13]),
     # "static": (column[3], row[13]),
 
     "ice_top_left": (column[4], row[13]),

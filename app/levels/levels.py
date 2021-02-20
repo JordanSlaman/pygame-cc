@@ -21,9 +21,9 @@ level_1 = Level(level_id=0,
 """)
 
 level_2 = Level(level_id=1,
-                 name="Lesson 2",
-                 code="JXMJ",
-                 map_string="""
+                name="Lesson 2",
+                code="JXMJ",
+                map_string="""
    #######         
    #  c  #         
    #     #         
