@@ -3,12 +3,14 @@ import pygame
 from app.models.enums import Direction
 from app.utils.functions import one
 
+from app.sprites.tile_map import tile_size
+
 
 class ChipsChallenge:
     def __init__(self):
         self._running = True
         self._display_surf = None
-        self.size = self.weight, self.height = 21 * 40, 14 * 40
+        self.size = self.width, self.height = 21 * tile_size, 14 * tile_size
 
         self.clock = pygame.time.Clock()
 
