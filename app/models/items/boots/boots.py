@@ -1,7 +1,7 @@
-from ..enums import BootType
-from ..sprite import TILE_SPRITES
+from app.models.enums import BootType
+from app.models.sprite import TILE_SPRITES
 
-from .item import Item
+from app.models.items.item import Item
 
 
 class Boots(Item):

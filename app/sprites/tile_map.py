@@ -133,7 +133,7 @@ tiles = {
     "slide_right": (column[3], row[14]),
     "slide_spiral": (column[4], row[14]),
 
-    # "fire": (column[5], row[14]),
+    "fire": (column[5], row[14]),
     # "bomb": (column[6], row[14]),
     # "theif": (column[7], row[14]),
 

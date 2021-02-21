@@ -1,3 +1,3 @@
-from .levels import level_1, level_2
-
-all_levels = [level_1, level_2]
+from app.levels.level1 import Level1
+from app.levels.level2 import Level2
+from app.levels.level3 import Level3

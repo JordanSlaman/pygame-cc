@@ -5,6 +5,8 @@ class TileType(Enum):
     FLOOR = 1
     WALL = 2
     WATER = 3
+    SLIDE = 4
+    ICE = 5
 
 
 class Color(Enum):
@@ -31,8 +33,17 @@ class BootType(Enum):
 class PlayerState(Enum):
     ALIVE = 1
     DROWNED = 2
-    BURNED = 3
+    EATEN = 3
+    BURNED = 4
+
 
 class BoxState(Enum):
     PUSHABLE = 1
     SUBMERGED = 2
+
+
+class IceCorner(Enum):
+    TOP_LEFT = 1
+    TOP_RIGHT = 2
+    BOTTOM_LEFT = 3
+    BOTTOM_RIGHT = 4

@@ -1,4 +1,4 @@
-from .enums import TileType
+from .enums import TileType, Direction
 from .items.item import Item
 from .items import Door, ChipGate, Box
 from .sprite import TILE_SPRITES
@@ -24,10 +24,10 @@ class Tile:
         elif self.type in (TileType.FLOOR, TileType.WATER):
             return True
 
-
     def interact(self, player):
         if self.item:
             self.item.interact(tile=self, player=player)
+        # unlock keyboard
 
     @property
     def sprite(self):
@@ -36,6 +36,10 @@ class Tile:
                 return TILE_SPRITES["wall"]
             elif self.type == TileType.WATER:
                 return TILE_SPRITES["water"]
+            elif self.type == TileType.SLIDE:
+                return TILE_SPRITES["slide_spiral"]
+            elif self.type == TileType.ICE:
+                return TILE_SPRITES["ice"]
             else:
                 return TILE_SPRITES["tile"]
         else:

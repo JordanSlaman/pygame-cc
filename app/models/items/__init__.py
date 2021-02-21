@@ -1,4 +1,4 @@
-from .boots import Boots
+from app.models.items.boots import *
 from .box import Box
 from .chips import Chip, ChipGate
 from .door import Door

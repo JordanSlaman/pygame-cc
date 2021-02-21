@@ -13,18 +13,8 @@ class Box(Item):
         return f"Box: {self.state.name}"
 
     def _tile_behind(self, tile, player):
-        if player.last_move == Direction.LEFT:
-            return player.level.get_tile(x_pos=tile.x_pos - 1,
-                                         y_pos=tile.y_pos)
-        elif player.last_move == Direction.UP:
-            return player.level.get_tile(x_pos=tile.x_pos,
-                                         y_pos=tile.y_pos - 1)
-        elif player.last_move == Direction.RIGHT:
-            return player.level.get_tile(x_pos=tile.x_pos + 1,
-                                         y_pos=tile.y_pos)
-        elif player.last_move == Direction.DOWN:
-            return player.level.get_tile(x_pos=tile.x_pos,
-                                         y_pos=tile.y_pos + 1)
+        return player.level.get_relative_tile(tile=tile,
+                                              direction=player.last_move)
 
     def is_navigable(self, tile, player):
         if self.state == BoxState.PUSHABLE:
@@ -40,12 +30,12 @@ class Box(Item):
 
     def interact(self, tile, player):
         if self.state == BoxState.SUBMERGED:
-            tile.type = TileType.FLOOR
             tile.item = None
         elif self.state == BoxState.PUSHABLE:
             tile_behind = self._tile_behind(tile, player)
             if tile_behind.type == TileType.WATER:
                 self.state = BoxState.SUBMERGED
+                tile_behind.type = TileType.FLOOR
             tile.item = None
             tile_behind.item = self
 
