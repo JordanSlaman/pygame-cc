@@ -1,5 +1,5 @@
 from app.models.enums import BootType
-from app.models.sprite import TILE_SPRITES
+from app.models.game.sprite import TILE_SPRITES
 from app.models.items.item import Item
 
 

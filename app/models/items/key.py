@@ -1,5 +1,5 @@
 from ..enums import Color
-from ..sprite import TILE_SPRITES
+from app.models.game.sprite import TILE_SPRITES
 
 from .item import Item
 
@@ -15,6 +15,7 @@ class Key(Item):
     def interact(self, tile, player):
         tile.item = None
         player.inventory.append(self)
+        print(f"You have acquired a {self.color.name.title()} Key!")
 
     @property
     def sprite(self):

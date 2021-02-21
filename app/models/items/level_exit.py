@@ -1,5 +1,5 @@
 from .item import Item
-from ..sprite import TILE_SPRITES
+from app.models.game.sprite import TILE_SPRITES
 
 
 class LevelExit(Item):

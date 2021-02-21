@@ -1,5 +1,5 @@
 from ..enums import Color, TileType
-from ..sprite import TILE_SPRITES
+from app.models.game.sprite import TILE_SPRITES
 from .item import Item
 from .key import Key
 
@@ -14,9 +14,11 @@ class Door(Item):
             if isinstance(inv_item, Key) and inv_item.color == self.color:
                 # Consumes a door & matching key
                 player.inventory.remove(inv_item)
+                print(f"You have used up a {self.color.name.title()} Key!")
                 tile.item = None
                 tile.type = TileType.FLOOR
                 return True
+        print(f"You cannot pass without a {self.color.name.title()} Key!")
         return False
 
     @property

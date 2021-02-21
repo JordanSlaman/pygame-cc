@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import pygame
 import pygame.locals
 
-from ..sprites.tile_map import tiles, tile_size, tile_sprite_filepath
+from app.sprites.tile_map import tiles, tile_size, tile_sprite_filepath
 
 
 @dataclass

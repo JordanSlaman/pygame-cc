@@ -1,8 +1,7 @@
 import pygame
 
-from app.models.enums import Direction
-from app.models.level_manager import LevelManager
-from app.utils.functions import one
+from app.models.game.level_manager import LevelManager
+from app.models.game.key_handler import KeyHandler
 
 from app.sprites.tile_map import tile_size
 
@@ -14,12 +13,7 @@ class ChipsChallenge:
         self._display_surf = None
 
         self.clock = pygame.time.Clock()
-
-        self.keys_locked = False
-        self._key_repeat_timer = 0
-        self._last_keydown_timer = 0
-        self.last_keydown_timeout_ms = 250
-        self.key_repeat_ms = 250
+        self.key_handler = KeyHandler()
 
     def on_init(self):
         pygame.init()
@@ -27,7 +21,8 @@ class ChipsChallenge:
 
         self._display_surf = pygame.display.set_mode(LEVEL_1_SIZE, pygame.HWSURFACE | pygame.DOUBLEBUF)
 
-        self.level_manager = LevelManager(window_surface=self._display_surf)
+        self.level_manager = LevelManager(window_surface=self._display_surf,
+                                          key_handler=self.key_handler)
         self.level.draw()
         pygame.display.flip()
 
@@ -37,12 +32,11 @@ class ChipsChallenge:
         if event.type == pygame.QUIT:
             self._running = False
         elif event.type == pygame.KEYDOWN:
-            self._last_keydown_timer = 0
-            self.handle_movement_keypress()
+            self.key_handler.keydown_event()
 
     def on_loop(self, time):
         self.level.tick(time)
-        self.handle_key_repeat(time)
+        self.key_handler.handle_key_repeat(time)
 
     def on_render(self):
         self.level.draw()
@@ -64,31 +58,6 @@ class ChipsChallenge:
             self.on_loop(time)
             self.on_render()
         self.on_cleanup()
-
-    def handle_key_repeat(self, time):
-        self._key_repeat_timer += time
-        self._last_keydown_timer += time
-
-        if self._last_keydown_timer > self.key_repeat_ms and self._key_repeat_timer > self.key_repeat_ms:
-            self._key_repeat_timer = 0
-            self.handle_movement_keypress()
-
-    def handle_movement_keypress(self):
-        keystate = pygame.key.get_pressed()
-
-        if one([keystate[pygame.K_RIGHT],
-                keystate[pygame.K_LEFT],
-                keystate[pygame.K_UP],
-                keystate[pygame.K_DOWN]]):
-
-            if keystate[pygame.K_RIGHT]:
-                self.level.player.move(Direction.RIGHT)
-            elif keystate[pygame.K_LEFT]:
-                self.level.player.move(Direction.LEFT)
-            elif keystate[pygame.K_UP]:
-                self.level.player.move(Direction.UP)
-            elif keystate[pygame.K_DOWN]:
-                self.level.player.move(Direction.DOWN)
 
     @property
     def level(self):

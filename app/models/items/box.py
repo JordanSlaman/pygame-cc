@@ -1,5 +1,5 @@
-from ..enums import BoxState, Direction, TileType
-from ..sprite import TILE_SPRITES
+from ..enums import BoxState, TileType
+from app.models.game.sprite import TILE_SPRITES
 
 from .item import Item
 
@@ -14,7 +14,7 @@ class Box(Item):
 
     def _tile_behind(self, tile, player):
         return player.level.get_relative_tile(tile=tile,
-                                              direction=player.last_move)
+                                              direction=player.last_direction)
 
     def is_navigable(self, tile, player):
         if self.state == BoxState.PUSHABLE:

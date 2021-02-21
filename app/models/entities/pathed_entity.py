@@ -37,7 +37,7 @@ class PathedEntity(Entity):
         next_tile, last_direction = self.get_next_from_path()
 
         self.current_tile = next_tile
-        self.last_move = last_direction
+        self.last_direction = last_direction
 
     def tick(self, time):
         # Game ticks at 60x/second.

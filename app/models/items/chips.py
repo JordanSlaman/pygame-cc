@@ -1,5 +1,5 @@
 from .item import Item
-from ..sprite import TILE_SPRITES
+from app.models.game.sprite import TILE_SPRITES
 
 
 class Chip(Item):
@@ -14,6 +14,7 @@ class Chip(Item):
     def interact(self, tile, player):
         tile.item = None
         player.chips_collected += 1
+        print(f"You collected a chip! Remaining: {player.chips_remaining()}")
 
 
 class ChipGate(Item):
@@ -27,7 +28,8 @@ class ChipGate(Item):
         return f"{self.__class__.__name__} [{self.chips_required}]"
 
     def is_navigable(self, player, tile):
-        if player.chips_collected == self.level.chip_count:
+        if player.chips_remaining() == 0:
             tile.item = None
             return True
+        print("You cannot pass until you've collected all the chips!")
         return False

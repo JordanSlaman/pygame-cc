@@ -8,6 +8,7 @@ class Level1(Level):
                          level_id=1,
                          name="Lesson 1",
                          code="BDHP",
+                         level_info="Hint: Collect chips to get past the chip socket. Use keys to open doors.",
                          map_string="""
      ##### #####     
      #   ###   #     

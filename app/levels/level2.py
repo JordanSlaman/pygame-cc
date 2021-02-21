@@ -10,6 +10,7 @@ class Level2(Level):
                          level_id=2,
                          name="Lesson 2",
                          code="JXMJ",
+                         level_info="Hint: Push blocks into water to make dirt. Watch out for monsters.",
                          map_string="""
    #######         
    #  c  #         

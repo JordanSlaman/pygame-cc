@@ -1,5 +1,5 @@
-from app.models.enums import Direction
-from app.models.sprite import TILE_SPRITES
+from app.models.enums import BootType, Direction
+from app.models.game.sprite import TILE_SPRITES
 
 from app.models.items.item import Item
 
@@ -17,3 +17,7 @@ class SlideDirection(Item):
             Direction.RIGHT: TILE_SPRITES["slide_right"],
             Direction.DOWN: TILE_SPRITES["slide_down"],
         }[self.direction]
+
+    def interact(self, tile, player):
+        if not player.has_boots(BootType.SUCTION):
+            player.move_locked(direction=self.direction)

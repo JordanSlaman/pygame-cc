@@ -1,5 +1,5 @@
 from app.models.enums import Direction
-from app.models.sprite import tile_size
+from app.models.game.sprite import tile_size
 from app.models.tile import Tile
 
 
@@ -9,7 +9,7 @@ class Entity:
 
         self.level = level
         self.current_tile = starting_tile
-        self.last_move = starting_direction
+        self.last_direction = starting_direction
 
     def __repr__(self):
         return f"{self.__class__.__name__}: ({self.x_pos}, {self.y_pos})"
