@@ -6,19 +6,32 @@ from app.models.game.sprite import tile_size
 
 
 class Level:
+    level_id = 0
+    name = None
+    code = None
+    level_info = "Uninitialized"
+    map_string = None
 
-    def __init__(self, manager, level_id: int, name: str, code: str, level_info: str, map_string: str):
+    def __init__(self, manager):
+        cls = self.__class__
+
         self.level_manager = manager
 
-        self.level_id = level_id
-        self.name = name
-        self.code = code
-        self.level_info = level_info
+        if not all([cls.level_id,
+                    cls.name,
+                    cls.code,
+                    cls.level_id,
+                    cls.map_string]):
+            raise NotImplementedError
+
+        self.level_id = cls.level_id
+        self.name = cls.name
+        self.level_info = cls.level_info
 
         self.chip_count = 0
         self.player = None
 
-        self.map = self.init_map(map_string)
+        self.map = self.init_map(cls.map_string)
         self.map_width = 0
         self.map_height = 0
 
@@ -226,7 +239,6 @@ class Level:
 
         if self.player.is_movement_locked:
             self.player.movement_locked_tick(time)
-
 
     def create_path(self, start_x, start_y, direction_list):
         tile = self.get_tile(x_pos=start_x, y_pos=start_y)

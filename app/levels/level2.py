@@ -4,14 +4,11 @@ from app.models.enums import Direction
 
 
 class Level2(Level):
-
-    def __init__(self, manager):
-        super().__init__(manager,
-                         level_id=2,
-                         name="Lesson 2",
-                         code="JXMJ",
-                         level_info="Hint: Push blocks into water to make dirt. Watch out for monsters.",
-                         map_string="""
+    level_id = 2
+    name = "Lesson 2"
+    code = "JXMJ"
+    level_info = "Hint: Push blocks into water to make dirt. Watch out for monsters."
+    map_string = """
    #######         
    #  c  #         
    #     #         
@@ -23,7 +20,10 @@ class Level2(Level):
    #     #         
    #  c  #         
    #######         
-""")
+"""
+
+    def __init__(self, manager):
+        super().__init__(manager)
         bug_path = self.create_path(start_x=7,
                                     start_y=3,
                                     direction_list=[

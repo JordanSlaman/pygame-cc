@@ -55,14 +55,14 @@ class KeyHandler:
     def handle_gamestate_keypress(self, keystate):
 
         if keystate[pygame.K_1]:
-            self.level_manager.set_level(level_id=1)
+            self.level_manager.set_level_by_id(level_id=1)
         elif keystate[pygame.K_2]:
-            self.level_manager.set_level(level_id=2)
+            self.level_manager.set_level_by_id(level_id=2)
         elif keystate[pygame.K_3]:
-            self.level_manager.set_level(level_id=3)
+            self.level_manager.set_level_by_id(level_id=3)
 
         elif keystate[pygame.K_r]:
-            self.level_manager.re_initialize()
+            self.level_manager.reinitialize()
 
 
 
