@@ -94,17 +94,17 @@ class Player(Entity):
     def drown(self):
         self.state = PlayerState.DROWNED
         print(f"You drowned! Chip can't swim without flippers.")
-        self.level_manager.re_initialize()
+        self.level_manager.reinitialize()
 
     def burn(self):
         self.state = PlayerState.BURNED
         print(f"You burned! Chip burned to a crisp!.")
-        self.level_manager.re_initialize()
+        self.level_manager.reinitialize()
 
     def kill(self):
         self.state = PlayerState.EATEN
         print(f"You died! Chip was eaten by a bug.")
-        self.level_manager.re_initialize()
+        self.level_manager.reinitialize()
 
     @property
     def level_manager(self):
